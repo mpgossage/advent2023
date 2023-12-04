@@ -50,3 +50,34 @@ func TestLoadLinesOnEmpty(t *testing.T) {
 		t.Errorf("LoadLines() was able to read file when not supposed to")
 	}
 }
+
+func TestINear(t *testing.T) {
+	type args struct {
+		a    int
+		b    int
+		dist int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{"simple", args{10,11, 1}, true},
+		{"simple-false", args{10,12, 1}, false},
+		{"reverse", args{11,10, 1}, true},
+		{"reverse-false", args{12,10, 1}, false},
+		{"zero", args{0,1, 2}, true},
+		{"zero-false", args{0,3, 2}, false},
+		{"negative", args{0,-1, 2}, true},
+		{"negative-false", args{0,-3, 2}, false},
+		{"across-zero", args{1,-1, 2}, true},
+		{"across-zero-false", args{1,-3, 2}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := INear(tt.args.a, tt.args.b, tt.args.dist); got != tt.want {
+				t.Errorf("INear() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
