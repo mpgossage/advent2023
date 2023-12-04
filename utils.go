@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"os"
+	"strconv"
+	"strings"
 )
 
 // testing: do I need a comment
@@ -52,6 +54,16 @@ func INear(a,b int, dist int) bool {
 	} else {
 		return -delta <= dist
 	}
+}
+
+func StringToIntArray(str, sep string) []int {
+	var result []int
+	for _, s := range strings.Split(str, sep) {
+		if val, err := strconv.Atoi(s); err == nil {
+			result = append(result, val)
+		}
+	}
+	return result
 }
 
 type Coord struct {
