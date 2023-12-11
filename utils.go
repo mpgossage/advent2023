@@ -79,6 +79,10 @@ func LeastCommonMultiple(n,m int) int {
 	return m1
 }
 
+func LastInt(seq []int) int {
+	return seq[len(seq)-1]
+}
+
 type Coord struct {
 	x,y int
 }
