@@ -86,3 +86,44 @@ func LastInt(seq []int) int {
 type Coord struct {
 	x,y int
 }
+
+type CoordCompass struct {
+	Coord
+	dir Compass
+}
+
+type Compass int
+const (
+	North Compass = iota
+	East
+	South
+	West
+)
+
+func OppositeCompass(dir Compass) Compass {
+	switch dir {
+	case North:
+		return South
+	case East:
+		return West
+	case South:
+		return North
+	case West:
+		return East
+	}
+	return -1
+}
+
+func MoveCoordCompass(pos Coord, dir Compass) Coord {
+	switch dir {
+	case North:
+		return Coord{pos.x, pos.y-1}
+	case East:
+		return Coord{pos.x+1, pos.y}
+	case South:
+		return Coord{pos.x, pos.y+1}
+	case West:
+		return Coord{pos.x-1, pos.y}
+	}
+	return Coord{}
+}
