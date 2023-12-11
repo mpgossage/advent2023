@@ -66,6 +66,19 @@ func StringToIntArray(str, sep string) []int {
 	return result
 }
 
+func LeastCommonMultiple(n,m int) int {
+	// https://stackoverflow.com/questions/3154454/what-is-the-most-efficient-way-to-calculate-the-least-common-multiple-of-two-int
+	n1, m1 := n, m
+	for m1 != n1 {
+		if m1 > n1 {
+			n1 += n
+		} else {
+			m1 += m
+		}
+	}
+	return m1
+}
+
 type Coord struct {
 	x,y int
 }
