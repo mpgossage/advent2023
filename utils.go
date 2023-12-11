@@ -127,3 +127,15 @@ func MoveCoordCompass(pos Coord, dir Compass) Coord {
 	}
 	return Coord{}
 }
+
+func ManhattenDistance(a,b Coord) int {
+	dx:=a.x - b.x
+	if dx < 0 {
+		dx=-dx
+	}
+	dy:=a.y-b.y
+	if dy<0 {
+		dy=-dy
+	}
+	return dx+dy
+}
