@@ -86,6 +86,10 @@ func main() {
 		day15a(filename)
 	case "15b" :
 		day15b(filename)
+	case "16a" :
+		day16a(filename)
+	case "16b" :
+		day16b(filename)
 	default:
 		fmt.Printf("no such day %s", day)
 	}
