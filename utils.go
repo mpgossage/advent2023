@@ -27,6 +27,32 @@ func LoadLines(fileName string) ([]string, error) {
 	return result, nil
 }
 
+func LoadIntGrid(fileName string) ([][]int, error) {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	var result [][]int
+	for scanner.Scan() {
+		var line []int
+		for _,c:=range scanner.Text(){
+			val,err:=strconv.Atoi(string(c))
+			if err == nil {
+				line=append(line,val)
+			}
+		}
+		result=append(result,line)
+	}
+
+	if err:= scanner.Err(); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // golang doesn't have a max/min for int!!!
 // Max returns the larger of x or y.
 func Max(x, y int) int {
@@ -126,6 +152,10 @@ func MoveCoordCompass(pos Coord, dir Compass) Coord {
 		return Coord{pos.x-1, pos.y}
 	}
 	return Coord{}
+}
+
+func MakeMovedCoordCompass(pos Coord, dir Compass) CoordCompass {
+	return CoordCompass{Coord:MoveCoordCompass(pos,dir),dir:dir}
 }
 
 func ManhattenDistance(a,b Coord) int {
